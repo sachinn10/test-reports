@@ -55,7 +55,7 @@ function myFunction() {
         document.getElementById('div1').innerHTML = t;
         }
     catch(err){
-        document.getElementById("div3").innerHTML = "SERVER NOT RESPOND";
+        document.getElementById("div3").innerHTML = err.message;
     }
     }
     getdata();
