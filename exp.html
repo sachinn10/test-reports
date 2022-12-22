@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function myFunction() {
+            document.getElementById('div3').innerHTML = '';
+            fetch("https://dummyjson.com/products/")
+                .then(
+                    res => {
+                        res.json().then(
+                            data => {
+                                let t = '<tr id="a1">';
+                                for (x in data.products[0]) {
+                                    if (x != 'images') {
+
+                                        t += '<th>' + x + '</th>';
+                                    }
+                                }
+                                t += '</tr>';
+                                var a = 0;
+                                for (y in data.products) {
+                                    t += '<tr>';
+                                    for (m in data.products[a]) {
+                                        if (m != 'images') {
+                                            t += '<td>' + data.products[a][m] + '</td>';
+                                        }
+                                    }
+                                    a += 1;
+                                }
+                                t += '</tr>';
+                                document.getElementById('div1').innerHTML = t;
+                            }
+                        )
+                    }
+                )
+        }
+
+
+    </script>
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            margin-left: 20px;
+            overflow: scroll;
+            background-color: white;
+
+        }
+        body {
+      background-color: rgb(234, 240, 241);
+    }
+
+        #div1 {
+            padding: 15px;
+            width: 99%;
+            height: 600px;
+            overflow: scroll;
+            margin-left: 25px;
+        }
+
+        
+
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            color: blue;
+            background-color: rgb(221, 160, 160);
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body onload="myFunction()">
+    
+        <p id="div3">Test Report display here!</p>
+        <table id="div1"></table>
+    <
+</body>
+
+</html>
