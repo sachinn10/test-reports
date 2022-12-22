@@ -1,62 +1,105 @@
 function myFunction() {
-    
-    async function getdata() {
-        try{
-        const response = await fetch('http://10.33.35.21:5000/GetProdData');
-        var data = await response.json();
-        console.log(data)
-        var t = '<tr><th></th><th></th><th></th><th></th><th></th><th>CARD</th><th colspan="4">ONOFF</th><th></th><th colspan="4">ONOFF</th>'+
-            '<th></th><th></th><th></th><th colspan="4">Input45</th><th colspan="4">Gain</th><th colspan="4">Output</th><th></th></tr>';
-        t += '<tr><th></th><th>Date&Time</th><th>Test Time</th><th>LNA PART NUMBER</th><th>SERIAL NMBER</th><th>TYPE</th><th>LDO A</th>'+
-            '<th>LDO B</th><th>LDO C</th><th>LDO D</th><th>3V3</th><th>LAN A</th><th>LAN B</th><th>LAN C</th><th>LAN D</th><th>5V5</th><th>Center_freq</th>'+
-            '<th>SPAN</th><th>CH A dbm</th><th>CH B dbm</th><th>CH C dbm</th><th>CH D dbm</th><th>CH A dbm</th><th>CH B dbm</th><th>CH C dbm</th>'+
-            '<th>CH D dbm</th><th>CH-A dbm</th><th>CH-B dbm</th><th>CH-C dbm</th><th>CH-D dbm</th><th>RESULT</th></tr>';
-        var j = 0;
-        var k = 1;
-        for (let x in data) {
-            if (data[j] != undefined) {
-                if (data[j][0] != ('serail_number')) {
 
-                    t += '<tr><td>' + k + '</td><td>' + data[j][1]['Date_Time'] + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + data[j][0] + '</td>';
-                    t += '<td>' + data[j][1]['CARD_TYPE'] + '</td>';
-                    t += '<td>' + data[j][1]['LDO_ONOFF_A'] + '</td>';
-                    t += '<td>' + data[j][1]['LDO_ONOFF_B'] + '</td>';
-                    t += '<td>' + data[j][1]['LDO_ONOFF_C'] + '</td>';
-                    t += '<td>' + data[j][1]['LDO_ONOFF_D'] + '</td>';
-                    t += '<td>' + data[j][1]['3V3'] + '</td>';
-                    t += '<td>' + data[j][1]['LNA_ONOFF_A'] + '</td>';
-                    t += '<td>' + data[j][1]['LNA_ONOFF_B'] + '</td>';
-                    t += '<td>' + data[j][1]['LNA_ONOFF_C'] + '</td>';
-                    t += '<td>' + data[j][1]['LNA_ONOFF_D'] + '</td>';
-                    t += '<td>' + data[j][1]['5V5'] + '</td>';
-                    t += '<td>' + data[j][1]['center_frequency'] + '</td>';
-                    t += '<td>' + data[j][1]['span'] + '</td>';
-                    t += '<td>' + data[j][1]['GAIN_CHANNELA'] + '</td>';
-                    t += '<td>' + data[j][1]['GAIN_CHANNELB'] + '</td>';
-                    t += '<td>' + data[j][1]['GAIN_CHANNELC'] + '</td>';
-                    t += '<td>' + data[j][1]['GAIN_CHANNELD'] + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + '' + '</td>';
-                    t += '<td>' + data[j][1]['OUTPUT_CHANNELA'] + '</td>';
-                    t += '<td>' + data[j][1]['OUTPUT_CHANNELB'] + '</td>';
-                    t += '<td>' + data[j][1]['OUTPUT_CHANNELC'] + '</td>';
-                    t += '<td>' + data[j][1]['OUTPUT_CHANNELD'] + '</td>';
-                    t += '<td>' + data[j][1]['RESULT'] + '</td></tr>';
-                    k += 1;
+    try {
+        let r = fetch('http://10.33.35.21:5000/GetProdData');
+    }
+    catch (err) {
+        document.getElementById("div3").innerHTML = "SERVER NOT RESPONDING";
+        console.log(err);
+    }
+
+    async function getdata() {
+
+        try {
+            const response = await fetch('http://10.33.35.21:5000/GetProdData');
+            var data = await response.json();
+            console.log(data)
+            document.getElementById("div4").innerHTML = '<div id="div2"><table id="div1"><caption>LNA TEST REPORT</caption></table></div>';
+            var t = '<tr><th></th><th></th><th></th><th></th><th></th><th>CARD</th><th colspan="4">ONOFF</th><th></th><th colspan="4">ONOFF</th>' +
+                '<th></th><th></th><th></th><th colspan="4">Input45</th><th colspan="4">Gain</th><th colspan="4">Output</th><th></th></tr>';
+            t += '<tr><th>S/N</th><th>Date&Time</th><th>Test Time</th><th>LNA PART NUMBER</th><th>SERIAL NMBER</th><th>TYPE</th><th>LDO A</th>' +
+                '<th>LDO B</th><th>LDO C</th><th>LDO D</th><th>3V3</th><th>LAN A</th><th>LAN B</th><th>LAN C</th><th>LAN D</th><th>5V5</th><th>Center_freq</th>' +
+                '<th>SPAN</th><th>CH A dbm</th><th>CH B dbm</th><th>CH C dbm</th><th>CH D dbm</th><th>CH A dbm</th><th>CH B dbm</th><th>CH C dbm</th>' +
+                '<th>CH D dbm</th><th>CH-A dbm</th><th>CH-B dbm</th><th>CH-C dbm</th><th>CH-D dbm</th><th>RESULT</th></tr>';
+            let k = 1
+            let s = 0
+            const arr = ['', '', '', '', '', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'GHz', 'MHz', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm', 'dbm']
+            
+            for (let x of data) {
+                if (x[0] != undefined) {
+                    t += '<tr><td>' + k + '</td>';
+                    for (let i = 0; i <= 28; i++) {
+                        t += '<td>' + x[i] + arr[i] + '</td>';
+                    }
+                    if (x[29].toUpperCase() == 'PASS') {
+                        t += '<td style="background-color: green; color: white">' + x[29] + '</td></tr>';
+                        k += 1;
+                    }
+                    else {
+                        t += '<td style="background-color: red; color: white">' + x[29] + '</td></tr>';
+                        k += 1;
+                    }
                 }
             }
-            j += 1;
+            document.getElementById('div1').innerHTML = t;
         }
-        document.getElementById('div1').innerHTML = t;
+
+        catch (err) {
+            document.getElementById("div3").innerHTML = "Server not responding";
+            console.log(err)
         }
-    catch(err){
-        document.getElementById("div3").innerHTML = err.message;
-    }
+
     }
     getdata();
+}
+
+function showsidebar() {
+    document.getElementById('cs').style.display = 'inline';
+}
+
+function hide() {
+    document.getElementById('cs').style.display = 'none';
+}
+
+var myWindow;
+function login() {
+
+    var uname = document.getElementById("email").value;
+    var pwd = document.getElementById("pwd1").value;
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (uname == '') {
+        alert("please enter user name.");
+    }
+
+    else if (pwd == '') {
+        alert("enter the password");
+    }
+
+    else if (pwd.length < 6) {
+        alert("Password min length is 6.");
+    }
+
+    else {
+
+        if ((uname == 'tejas') & (pwd == 'tejas123')) {
+            //Redirecting to other page or webste code or you can set your own html page.
+            myWindow = window.open("index.html", "_self");
+        }
+
+        else {
+            alert("Invalid Username or Password")
+        }
+    }
+}
+
+//Reset Inputfield code.
+function clearFunc() {
+    document.getElementById("email").value = "";
+    document.getElementById("pwd1").value = "";
+}
+
+function logout() {
+    window.close()
+    window.open("login.html", "_self")
 }

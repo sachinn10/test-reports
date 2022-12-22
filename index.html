@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="test.js"></script>
+    <title>HOME PAGE</title>
+</head>
+
+<body>
+
+    <div class="body">
+        <div class="navbar">
+            <a class="active" href="#home">Home</a>
+            <a href="https://www.google.com/maps/search/tejas+networks/@12.8462962,77.6662851,15z/data=!3m1!4b1" target="_blank">Map</a>
+            <a href="https://www.tejasnetworks.com/contact.php" target="_blank">Contact</a>
+            <a href="https://en.wikipedia.org/wiki/Tejas_Networks" target="_blank">About</a>
+            <a href="login.html" target="_blank" onClick="javascript:window.close()" style="float: right;">Logout</a>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="column middle">
+                    <div class="column side" id="cs">
+                        <button class="hidebtn" onclick="hide()"><b>X</b></button><br>
+
+                        <div class="dropdown"><br><br>
+                            <button class="dropbtn"><B>TEST REPORTS</B></button>
+                            <div class="dropdown-content">
+                                <a href="#" style="color: white;">RFPC</a>
+                                <a href="#" style="color: white;"">PAM</a>
+                                <a href=" lna_rep.html" style="color: white;"" target=" _blank">LNA</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column middle" id="side">
+                        <button onclick="showsidebar()">
+                            <div class="menu"></div>
+                            <div class="menu"></div>
+                            <div class="menu"></div>
+                        </button>
+                    </div>
+
+                    <div class="logo">
+                        <img src="tj.png" alt="tejas network logo" style="width:308px;height:128px;float: right;">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="row">               
+                <div class="column">
+                    <h3>Tejas Networks Ltd </h3>
+                    <p>Sri Ranga It Park,Electronic City Phase-2, Bengaluru.</p>
+                </div>
+
+                <div class="column">
+                    <a href="info@tejasnetworks.com">info@tejasnetworks.com</a><br>
+                    <p>+91 80 4179 4600</p>
+                </div>
+
+                <div class="column">
+                    <ul class="demo">
+                        <li><a href="https://www.facebook.com/TejasNetworksOfficial" style="color: rgb(122, 216, 78);">
+                                Facebook</a></li>
+                        <li><a href="https://www.linkedin.com/company/tejas-networks" style="color: rgb(122, 216, 78);""> Linkdin</a></li>
+                        <li><a href=" https://twitter.com/TejasN_Official?lang=en" style="color: rgb(122, 216, 78);">
+                                Twitter</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCTFMTepVvVQvBrVUSBnbkDA/videos"
+                                style="color: rgb(122, 216, 78);"> Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
