@@ -1,6 +1,6 @@
 function myFunction() {
     try {
-        let r = fetch('http://10.33.35.21:5000/GetProdData');
+        let r = fetch('https://10.33.41.69:5000/GetProdData');
     }
     catch (err) {
         document.getElementById("div3").innerHTML = "SERVER NOT RESPONDING";
@@ -8,7 +8,7 @@ function myFunction() {
     }
     async function getdata() {
         try {
-            const response = await fetch('http://10.33.35.21:5000/GetProdData');
+            const response = await fetch('https://10.33.41.69:5000/GetProdData');
             var data = await response.json();
             console.log(data)
             document.getElementById("div4").innerHTML = '<div id="div2"><table id="div1"></table></div>';
